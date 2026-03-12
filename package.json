@@ -1,6 +1,6 @@
 {
   "name": "@blockcerts/lds-merkle-proof-2019",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "LDS Merkle Proof 2019 signature suite tools",
   "keywords": [
     "lds-merkle-proof-2019",

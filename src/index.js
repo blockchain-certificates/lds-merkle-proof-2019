@@ -1,8 +1,8 @@
-const Encoder = require('./Encoder')
-const Decoder = require('./Decoder')
-const Keymap = require('./Keymap')
+import Encoder from './Encoder'
+import Decoder from './Decoder'
+import Keymap from './Keymap'
 
-module.exports = {
+export {
   Encoder,
   Decoder,
   Keymap
