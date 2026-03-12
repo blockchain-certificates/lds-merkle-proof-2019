@@ -23,7 +23,9 @@ const chain = {
     networks: {
       mainnet: 1,
       ropsten: 3,
-      rinkeby: 4
+      rinkeby: 4,
+      goerli: 5,
+      sepolia: 11155111
     }
   },
   mtc: {
@@ -31,6 +33,12 @@ const chain = {
     networks: {
       mainnet: 137,
       mumbai: 80001
+    }
+  },
+  mocknet: {
+    id: -1,
+    networks: {
+      mocknet: -1
     }
   }
 }
