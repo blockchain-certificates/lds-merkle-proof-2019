@@ -1,7 +1,7 @@
 import Keymap from './Keymap'
 
 import cbor from 'cbor'
-import multibase from 'multibase'
+import * as base58 from 'base58-universal'
 
 function invert (obj) {
   return Object.fromEntries(Object.entries(obj).map(([k, v]) => [v, k]));
@@ -15,10 +15,18 @@ function invertBy (obj, fn) {
   }, {});
 }
 
+function isBase58btc(str) {
+  if (typeof str !== 'string') return false;
+  if (str.length <= 1) return false;
+  if (str[0] !== 'z') return false;
+
+  const payload = str.slice(1);
+  return /^[1-9A-HJ-NP-Za-km-z]+$/.test(payload);
+}
+
 class Decoder {
   constructor(base58) {
-    const valid = multibase.isEncoded(base58)
-    if (!valid)
+    if (!isBase58btc(base58))
       throw new Error('Base58 string is invalid. Cannot construct Decoder.')
 
     this.base58 = base58
@@ -79,8 +87,8 @@ class Decoder {
   }
 
   decode() {
-    const encoded = multibase.decode(this.base58)
-    const map = cbor.decode(encoded)
+    const encoded = base58.decode(this.base58.slice(1))
+    const map = cbor.decode(Buffer.from(encoded))
     const json = this.constructRootJSON(map)
 
     return json

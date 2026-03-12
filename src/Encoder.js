@@ -2,7 +2,7 @@ import { validate } from './schema'
 import Keymap from './Keymap'
 
 import cbor from 'cbor'
-import multibase from 'multibase'
+import * as base58 from 'base58-universal'
 
 class Encoder {
   constructor(json) {
@@ -62,7 +62,7 @@ class Encoder {
   encode() {
     const map = this.constructRootMap()
     const encoded = cbor.encode(map)
-    return multibase.encode('base58btc', encoded)
+    return 'z' + base58.encode(encoded)
   }
 }
 
