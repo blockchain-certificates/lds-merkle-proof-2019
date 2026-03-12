@@ -1,6 +1,6 @@
 {
-  "name": "@vaultie/lds-merkle-proof-2019",
-  "version": "0.0.7",
+  "name": "@blockcerts/lds-merkle-proof-2019",
+  "version": "1.0.0",
   "description": "LDS Merkle Proof 2019 signature suite tools",
   "keywords": [
     "lds-merkle-proof-2019",
@@ -9,23 +9,21 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vaultie/lds-merkle-proof-2019.git"
+    "url": "https://github.com/blockchain-certificates/lds-merkle-proof-2019.git"
   },
-  "homepage": "https://github.com/vaultie/lds-merkle-proof-2019",
+  "homepage": "https://github.com/blockchain-certificates/lds-merkle-proof-2019.git",
   "main": "src/index.js",
   "dependencies": {
-    "ajv": "^6.10.2",
-    "cbor": "^5.0.1",
-    "encodr": "^1.2.1",
-    "lodash": "^4.17.20",
-    "multibase": "^0.6.0"
+    "@exodus/schemasafe": "^1.3.0",
+    "base58-universal": "^2.0.0",
+    "cbor": "^10.0.12"
   },
   "devDependencies": {
-    "jest": "^26.4.2"
+    "vitest": "^4.1.0"
   },
   "scripts": {
-    "test": "jest",
-    "postpublish": "npm publish --ignore-scripts --@vaultie:registry='https://registry.npmjs.org'"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "author": "Vaultie Inc.",
   "license": "MIT"

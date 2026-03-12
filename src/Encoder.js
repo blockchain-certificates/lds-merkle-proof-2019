@@ -1,16 +1,15 @@
-const { validate } = require('./schema')
-const Keymap = require('./Keymap')
+import { validate } from './schema'
+import Keymap from './Keymap'
 
-const cbor = require('cbor')
-const multibase = require('multibase')
-const _ = require('lodash')
+import cbor from 'cbor'
+import * as base58 from 'base58-universal'
 
 class Encoder {
   constructor(json) {
     const valid = validate(json)
     if (!valid)
       throw new Error('JSON is invalid. Cannot construct Encoder.')
-    
+
     this.json = json
   }
 
@@ -52,15 +51,18 @@ class Encoder {
   }
 
   constructPathMap(path) {
-    return _.flatten(path.map(item => 
-      Object.keys(item).map(key => [Keymap.path[key], cbor.encode(Buffer.from(item[key], 'hex'))]))
+    return path.flatMap(item =>
+        Object.keys(item).map(key => [
+          Keymap.path[key],
+          cbor.encode(Buffer.from(item[key], 'hex'))
+        ])
     )
   }
 
   encode() {
     const map = this.constructRootMap()
     const encoded = cbor.encode(map)
-    return multibase.encode('base58btc', encoded)
+    return 'z' + base58.encode(encoded)
   }
 }
 
