@@ -1,9 +1,8 @@
-const { validate } = require('./schema')
-const Keymap = require('./Keymap')
+import { validate } from './schema'
+import Keymap from './Keymap'
 
-const cbor = require('cbor')
-const multibase = require('multibase')
-const _flatten = require('lodash.flatten')
+import cbor from 'cbor'
+import multibase from 'multibase'
 
 class Encoder {
   constructor(json) {
@@ -52,8 +51,11 @@ class Encoder {
   }
 
   constructPathMap(path) {
-    return _flatten(path.map(item =>
-      Object.keys(item).map(key => [Keymap.path[key], cbor.encode(Buffer.from(item[key], 'hex'))]))
+    return path.flatMap(item =>
+        Object.keys(item).map(key => [
+          Keymap.path[key],
+          cbor.encode(Buffer.from(item[key], 'hex'))
+        ])
     )
   }
 

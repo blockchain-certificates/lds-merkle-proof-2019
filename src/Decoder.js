@@ -1,9 +1,19 @@
-const Keymap = require('./Keymap')
+import Keymap from './Keymap'
 
-const cbor = require('cbor')
-const multibase = require('multibase')
-const _invert = require('lodash.invert')
-const _invertBy = require('lodash.invertby')
+import cbor from 'cbor'
+import multibase from 'multibase'
+
+function invert (obj) {
+  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [v, k]));
+}
+
+function invertBy (obj, fn) {
+  return Object.entries(obj).reduce((acc, [key, value]) => {
+    const k = fn(value);
+    (acc[k] ||= []).push(key);
+    return acc;
+  }, {});
+}
 
 class Decoder {
   constructor(base58) {
@@ -15,7 +25,8 @@ class Decoder {
   }
 
   constructRootJSON(decoded) {
-    const rootKeymap = _invert(Keymap.root)
+    // invert
+    const rootKeymap = invert(Keymap.root)
 
     return decoded.reduce((acc, val) => {
       const key = rootKeymap[val[0]]
@@ -40,7 +51,7 @@ class Decoder {
   }
 
   constructAnchorsJSON(anchors) {
-    const chainKeymap = _invertBy(Keymap.chain, (value) => value.id)
+    const chainKeymap = invertBy(Keymap.chain, (value) => value.id)
 
     return anchors.map((anchor) =>
       anchor.reduce((acc, val) => {
@@ -49,7 +60,7 @@ class Decoder {
         }
         if (val[0] === 1) {
           const chain = acc.split(':').pop()
-          const networkKeymap = _invert(Keymap.chain[chain].networks)
+          const networkKeymap = invert(Keymap.chain[chain].networks)
           return `${acc}:${networkKeymap[val[1]]}`
         }
 
@@ -59,7 +70,7 @@ class Decoder {
   }
 
   constructPathJSON(path) {
-    const pathKeymap = _invert(Keymap.path)
+    const pathKeymap = invert(Keymap.path)
     return path.map(item => {
       return {
         [pathKeymap[item[0]]]: cbor.decode(item[1]).toString('hex')
