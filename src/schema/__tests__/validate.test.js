@@ -1,3 +1,5 @@
+import { describe, expect, test, it } from "vitest";
+
 const { validate } = require('../index')
 const validSchema = require('./valid.json')
 
