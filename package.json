@@ -7,6 +7,9 @@
     "verifiable credentials",
     "merkle-proof"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/blockchain-certificates/lds-merkle-proof-2019.git"
