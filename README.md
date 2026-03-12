@@ -8,14 +8,14 @@ This package contains the set of tools for LDS Merkle Proof 2019.
 
 To install run:
 ```
-npm i --save @vaultie/lds-merkle-proof-2019
+npm i @blockcerts/lds-merkle-proof-2019
 ```
 
 ## Encoding proofValue
 To encode JSON proofValue:
 
 ```
-const { Encoder } = require('@vaultie/lds-merkle-proof-2019')
+const { Encoder } = require('@blockcerts/lds-merkle-proof-2019')
 const encoder = new Encoder(proofValueJSON)
 
 encoder.encode() // Buffer of Base58 encoded data
@@ -27,7 +27,7 @@ encoder.encode().toString() // Base58 string
 To decode base58 proofValue:
 
 ```
-const { Decoder } = require('@vaultie/lds-merkle-proof-2019')
+const { Decoder } = require('@blockcerts/lds-merkle-proof-2019')
 const decoder = new Decoder(proofValueBase58)
 
 decoder.decode() // JSON object with proofValue
