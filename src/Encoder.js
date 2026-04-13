@@ -1,5 +1,5 @@
-import { validate } from './schema'
-import Keymap from './Keymap'
+import { validate } from './schema/index.js'
+import Keymap from './Keymap.js'
 
 import cbor from 'cbor'
 import * as base58 from 'base58-universal'

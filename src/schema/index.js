@@ -1,5 +1,5 @@
-const validate = require('./validate')
+import validate from './validate.js'
 
-module.exports = {
+export {
   validate
 }
