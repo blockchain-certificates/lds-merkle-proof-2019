@@ -1,6 +1,6 @@
-import Encoder from './Encoder'
-import Decoder from './Decoder'
-import Keymap from './Keymap'
+import Encoder from './Encoder.js'
+import Decoder from './Decoder.js'
+import Keymap from './Keymap.js'
 
 export {
   Encoder,

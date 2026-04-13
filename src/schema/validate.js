@@ -1,5 +1,6 @@
-const schema = require('./schema.json')
-const { validator } = require('@exodus/schemasafe')
+import schema from './schema.json' with { type: 'json' }
+import { validator } from '@exodus/schemasafe'
+
 const validate = validator(schema)
 
-module.exports = validate
+export default validate
