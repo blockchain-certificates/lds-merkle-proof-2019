@@ -35,6 +35,13 @@ const chain = {
       mumbai: 80001
     }
   },
+  base: {
+    id: 3,
+    networks: {
+      mainnet: 8453,
+      sepolia: 84532
+    }
+  },
   mocknet: {
     id: -1,
     networks: {
