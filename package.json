@@ -22,7 +22,7 @@
     "cbor": "^10.0.12"
   },
   "devDependencies": {
-    "vitest": "^4.1.4"
+    "vitest": "^5.1.0"
   },
   "scripts": {
     "test": "vitest run",
